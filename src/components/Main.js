@@ -268,38 +268,26 @@ class Main extends Component {
 
 
     render(){
-        if (this.state.sidebarShowing){
-            return (
-                <div className="main">
-                    <p className="unesco-intro">
-                        <button onClick={this.toggleSidebar}  className="menu-icon-button">
-                            {/* Globe by Nick Novell from the Noun Project */}
-                            <img className="globe" src={globe} alt="Menu icon"/>
-                        </button>
-                       CLick the globe to toggle the list of sites
-                    </p>
-                   
-                    <Sidebar allSites={this.state.sites} filteredSites={this.state.filteredSites} onClick={this.onSiteClick} onChange={this.handleChange}/>
-    
-                    <div tabIndex="0" id="map" className='map' aria-label="map" role="application"></div> 
-                </div>
-            )
-        } else {
-            return (
-                <div className="main">
-                    <p className="unesco-intro">
-                        <button onClick={this.toggleSidebar}  className="menu-icon-button">
-                            {/* Globe by Nick Novell from the Noun Project */}
-                            <img className="globe" src={globe} alt="Menu icon"/>
-                        </button>
-                        CLick the globe to toggle the list of sites
-                    </p>
-
-                    <div  tabIndex="0" id="map" className='map' aria-label="map" role="application"></div> 
-                </div>
-            )
-        }
         
+        return (
+            <div className="main">
+                <p className="unesco-intro">
+                    <button onClick={this.toggleSidebar}  className="menu-icon-button">
+                        {/* Globe by Nick Novell from the Noun Project */}
+                        <img className="globe" src={globe} alt="Menu icon"/>
+                    </button>
+                    CLick the globe to toggle the list of sites
+                </p>
+                
+                { this.state.sidebarShowing
+                 ? <Sidebar allSites={this.state.sites} filteredSites={this.state.filteredSites} onClick={this.onSiteClick} onChange={this.handleChange}/>
+                 : <div></div>
+                }
+
+                <div tabIndex="0" id="map" className='map' aria-label="map" role="application"></div> 
+            </div>
+        )
+         
     }
 }
 
