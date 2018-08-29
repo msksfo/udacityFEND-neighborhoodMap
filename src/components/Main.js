@@ -67,31 +67,53 @@ class Main extends Component {
     
     placeInitialMarkers = (sitesArray) =>  {
         var bounds = new window.google.maps.LatLngBounds();
-        
-       
-        // TODO: put tabIndex 0 on each marker? 
         let markers = this.state.markers;
         let marker;
         
-        /* 1. loop over the list of sites to create a marker and add it to the map at the         site coordinates
+        /* 1. loop over the list of sites to create a marker, colored according to site type, and add it to the map at the site coordinates
            2. add click event listener on each marker
         */
    
         sitesArray.forEach(value => {
             if (value.markerShowing){
-                marker = new window.google.maps.Marker({
-                    position: value.coords,
-                    map: this.state.map,
-                    title: value.name,
-                    photoId: value.photoId
-                })
-                bounds.extend(marker.position)
-                markers.push(marker)
-                marker.addListener('click', this.onMarkerClick)  
+                if (value.type === 'cultural'){
+                    marker = new window.google.maps.Marker({
+                        position: value.coords,
+                        map: this.state.map,
+                        title: value.name,
+                        photoId: value.photoId,
+                        icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
+                    })
+                    bounds.extend(marker.position)
+                    markers.push(marker)
+                    marker.addListener('click', this.onMarkerClick) 
+                } else if (value.type === 'natural'){
+                    marker = new window.google.maps.Marker({
+                        position: value.coords,
+                        map: this.state.map,
+                        title: value.name,
+                        photoId: value.photoId,
+                        icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+                    })
+                    bounds.extend(marker.position)
+                    markers.push(marker)
+                    marker.addListener('click', this.onMarkerClick) 
+                } else {
+                    marker = new window.google.maps.Marker({
+                        position: value.coords,
+                        map: this.state.map,
+                        title: value.name,
+                        photoId: value.photoId,
+                        icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+                    })
+                    bounds.extend(marker.position)
+                    markers.push(marker)
+                    marker.addListener('click', this.onMarkerClick) 
+                }
             }
         })
     
-         //this.map.fitBounds(bounds); // this doesn't work. why not???
+         this.map.fitBounds(bounds); 
          this.setState({markers: markers}) 
     }
 
@@ -161,11 +183,14 @@ class Main extends Component {
         */
     }
 
+    // Fill the infowindow with the site photo and information
     populateInfowindow(marker, url) {
-        // attach the info window to the specific marker that was clicked
         let infowindow = this.state.infowindow;
-       
-        if(infowindow.marker !== marker){
+        
+        // first check to make sure a different marker is being clicked
+        if(infowindow.marker !== marker){ 
+
+            // if so, assign the infowindow to that marker
             infowindow.marker = marker;
             infowindow.setContent(
                 `<div class="infowindow">
@@ -173,6 +198,8 @@ class Main extends Component {
                     <p class="location-title">${marker.title}</p>
                 </div>`
             );
+
+            // attach the info window to the specific marker that was clicked
             infowindow.open(this.map, marker);
         } 
            
@@ -216,7 +243,8 @@ class Main extends Component {
         const allSites = this.state.sites;
         let filtered = this.state.filteredSites;
         const siteType = e.target.value;
-    
+        
+        // if any infowindow was open, close it
         const infowindow = this.state.infowindow;
         infowindow.close();
 
@@ -239,36 +267,46 @@ class Main extends Component {
     }
 
 
+    // apply drop animation on marker when sidebar list item is chosen
+    animateMarker(marker){
+        marker.setAnimation(window.google.maps.Animation.BOUNCE)
+
+        setTimeout(() => {
+            this.removeAnimation(marker)
+        }, 1500)
+    }
+
+    removeAnimation(marker){
+        marker.setAnimation(null)
+    }
+
+
     // click or tab onto one of the sites in the sidebar list of sites
     handleListItemEvent = (e) => {
         const key = e.key;
         const markers = this.state.markers;
 
+         // find the marker corresponding to the site that triggered the event
+         const index = markers.findIndex( (value) => value.title === e.target.textContent)
+         
+            
+         // find the site with the name matching the text content of the clicked list item, to get the image source for the infowindow
+         const sites = this.state.sites;
+         const site = sites.find(value => value.name === e.target.textContent)
+         const photoUrl = site.photoSrc;
+
+         this.animateMarker(markers[index])
+         console.log(markers[index].getAnimation())
+         
+        
         // account for keypress event
         if (key){
             if (key === 'Enter'){
-                // find the marker corresponding to the site that was clicked
-            const index = markers.findIndex( (value) => value.title === e.target.textContent)
-            
-            // find the site with the name matching the text content of the clicked list item, to get the image source for the infowindow
-            const sites = this.state.sites;
-            const site = sites.find(value => value.name === e.target.textContent)
-            const photoUrl = site.photoSrc;
-
-            // open the infowindow 
+            // open the infowindow on the marker that triggered the event
             this.populateInfowindow(markers[index], photoUrl)   
             }
         // account for click event
         } else {
-            // find the marker corresponding to the site that was clicked
-            const index = markers.findIndex( (value) => value.title === e.target.textContent)
-            
-            // find the site with the name matching the text content of the clicked list item, to get the image source for the infowindow
-            const sites = this.state.sites;
-            const site = sites.find(value => value.name === e.target.textContent)
-            const photoUrl = site.photoSrc;
-
-            // open the infowindow 
             this.populateInfowindow(markers[index], photoUrl)   
         }              
     }
