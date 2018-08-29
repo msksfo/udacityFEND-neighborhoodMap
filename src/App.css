@@ -71,6 +71,7 @@ body, html {
 .globe {
   width: 50px;
   height: 50px;
+  padding-top: 4px;
 }
 
 .unesco-intro {
@@ -82,7 +83,7 @@ body, html {
   border: none;
   background-color: transparent;
   transition: .2s ease;
-  
+  margin-right: 5px;
 }
 
 .menu-icon-button:hover, .menu-icon-button:focus {
@@ -120,7 +121,7 @@ body, html {
   padding: 10px;
 }
 
-.sidebarSelect {
+.sidebar-select {
  height: 30px;
  width: 150px;
  font-size: 15px;
@@ -141,6 +142,7 @@ body, html {
 .sidebar-listItem:hover {
   background-color: #333;
   color: #fff;
+  cursor: pointer;
 }
 
 
