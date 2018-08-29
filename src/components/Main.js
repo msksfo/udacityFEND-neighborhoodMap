@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import '../App.css';
-
 import Sidebar from './Sidebar';
 import * as Sites from '../sites.json';
-
 import globe from '../images/globe.png';
 
 
@@ -21,21 +19,22 @@ class Main extends Component {
             filteredMarkers: [],
             infowindow: {},
             map: {},
-            sidebarShowing: true
+            sidebarShowing: false
         } 
     }
 
-
     componentDidMount(){
-        this.renderMap();
         this.getPhotos();
     }
 
+
+    // load the google maps api script
     renderMap = () => {
         const key = "AIzaSyC5ZHBlasW7FicVvD-9IyOkQWIzuk-Ht8M";
         loadScript(`https://maps.googleapis.com/maps/api/js?key=${key}&v=3&callback=initMap`)
         window.initMap = this.initMap
     }
+
 
     // make the map from google maps api, and place markers at each site location
     initMap = () => {
@@ -205,16 +204,19 @@ class Main extends Component {
                 data.forEach((value, index) => sites[index].photoSrc = value)})
             .catch(err => console.log('Error: ', err))
 
-        // update the sites' state to include the photo url
-        this.setState({sites: sites})
+        /* 1. first update the sites' state to include the dynamic data (photo urls),
+           2. THEN load the script and map to the page
+        */
+        this.setState({sites: sites}, this.renderMap)
     }
 
+
+    // use the select element to filter sites by type
     handleChange = (e) => {
         const allSites = this.state.sites;
         let filtered = this.state.filteredSites;
         const siteType = e.target.value;
-
-        
+    
         const infowindow = this.state.infowindow;
         infowindow.close();
 
@@ -236,23 +238,49 @@ class Main extends Component {
         this.placeFilteredMarkers(allSites)
     }
 
-    onSiteClick = (e) => {
+
+    // click or tab onto one of the sites in the sidebar list of sites
+    handleListItemEvent = (e) => {
+        const key = e.key;
         const markers = this.state.markers;
 
-        // find the marker corresponding to the site that was clicked
-        const index = markers.findIndex( (value) => value.title === e.target.textContent)
-        
-         // find the site with the name matching the text content of the clicked list item, to get the image source for the infowindow
-         const sites = this.state.sites;
-         const site = sites.find(value => value.name === e.target.textContent)
-         const photoUrl = site.photoSrc;
- 
-         // open the infowindow 
-         this.populateInfowindow(markers[index], photoUrl)   
+        // account for keypress event
+        if (key){
+            if (key === 'Enter'){
+                // find the marker corresponding to the site that was clicked
+            const index = markers.findIndex( (value) => value.title === e.target.textContent)
+            
+            // find the site with the name matching the text content of the clicked list item, to get the image source for the infowindow
+            const sites = this.state.sites;
+            const site = sites.find(value => value.name === e.target.textContent)
+            const photoUrl = site.photoSrc;
+
+            // open the infowindow 
+            this.populateInfowindow(markers[index], photoUrl)   
+            }
+        // account for click event
+        } else {
+            // find the marker corresponding to the site that was clicked
+            const index = markers.findIndex( (value) => value.title === e.target.textContent)
+            
+            // find the site with the name matching the text content of the clicked list item, to get the image source for the infowindow
+            const sites = this.state.sites;
+            const site = sites.find(value => value.name === e.target.textContent)
+            const photoUrl = site.photoSrc;
+
+            // open the infowindow 
+            this.populateInfowindow(markers[index], photoUrl)   
+        }              
     }
 
+    
     toggleSidebar = (e) => {
+        // when the globe icon is clicked, toggle the visibility of the sidebar
         const sidebarState = this.state.sidebarShowing;
+
+        // if there is an infowindow open, close it
+        const infowindow = this.state.infowindow;
+        infowindow.close();
    
         if (!sidebarState){
           this.setState({
@@ -263,14 +291,13 @@ class Main extends Component {
                 sidebarShowing: false
             })
         }
-   
      }
 
 
     render(){
         
         return (
-            <div className="main">
+            <main className="main">
                 <p className="unesco-intro">
                     <button onClick={this.toggleSidebar}  className="menu-icon-button">
                         {/* Globe by Nick Novell from the Noun Project */}
@@ -280,12 +307,12 @@ class Main extends Component {
                 </p>
                 
                 { this.state.sidebarShowing
-                 ? <Sidebar allSites={this.state.sites} filteredSites={this.state.filteredSites} onClick={this.onSiteClick} onChange={this.handleChange}/>
+                 ? <Sidebar allSites={this.state.sites} filteredSites={this.state.filteredSites} onKeyPress={this.handleListItemEvent} onClick={this.handleListItemEvent} onChange={this.handleChange}/>
                  : <div></div>
                 }
 
                 <div tabIndex="0" id="map" className='map' aria-label="map" role="application"></div> 
-            </div>
+            </main>
         )
          
     }
