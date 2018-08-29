@@ -4,7 +4,6 @@
         "coords": {"lat": 37.8651, "lng":-119.5383},
         "type": "natural",
         "markerShowing": true,
-        "infoWindowShowing": false,
         "photoId": 43316542794,
         "continent": "North America",
         "photoSrc": ""
@@ -14,7 +13,6 @@
         "coords": {"lat": -13.1631, "lng": -72.5450},
         "type": "mixed",
         "markerShowing": true,
-        "infoWindowShowing": false,
         "photoId": 29051779417,
         "continent": "South America",
         "photoSrc": ""
@@ -24,7 +22,6 @@
         "coords": {"lat": -2.333333, "lng": 34.833332},
         "type": "natural",
         "markerShowing": true,
-        "infoWindowShowing": false,
         "photoId": 42211340740,
         "continent": "Africa",
         "photoSrc": ""
@@ -34,7 +31,6 @@
         "coords": {"lat": 41.3876, "lng": 2.1753},
         "type": "cultural",
         "markerShowing": true,
-        "infoWindowShowing": false,
         "photoId": 35203823512,
         "continent": "Europe",
         "photoSrc": ""
@@ -44,7 +40,6 @@
         "coords": {"lat": -18.156290, "lng": 147.485962},
         "type": "natural",
         "markerShowing": true,
-        "infoWindowShowing": false,
         "photoId": 43524399412,
         "continent": "Australia",
         "photoSrc": ""
@@ -54,7 +49,6 @@
         "coords": {"lat": 31.897423, "lng": 54.356857},
         "type": "cultural",
         "markerShowing": true,
-        "infoWindowShowing": false,
         "photoId": 42165434924,
         "continent": "Asia",
         "photoSrc": ""
