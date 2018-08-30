@@ -13,9 +13,9 @@ class Sidebar extends Component {
             <div id="sidebar" className="sidebar"> 
                 <select id="sidebar-select" className="sidebar-select" aria-label="type of site" onChange={this.props.onChange}>
                     <option value="all">All Sites</option>
-                    <option value="cultural">Cultural</option>
-                    <option value="natural">Natural</option>
-                    <option value="mixed">Mixed</option>
+                    <option value="cultural">Cultural Sites</option>
+                    <option value="natural">Natural Sites</option>
+                    <option value="mixed">Mixed Sites</option>
                 </select>
 
                 {/* if the user has filtered the sites, show the filtered sites. otherwise show all of the sites */}
