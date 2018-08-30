@@ -25,9 +25,10 @@ This project was very challenging, but along the way I really solidified my unde
 * Click or tab onto a site in the list view to open the associated info window
 
 ## Credits
- * Map by Google Maps JavaScript API
- * Info window images obtained from the Flickr API
- * Globe icon by Nick Novell from the Noun Project
+ * Map by [Google Maps JavaScript API](https://developers.google.com/maps/documentation/javascript/tutorial)
+ * Info window images obtained from the [Flickr API](https://www.flickr.com/services/api/)
+ * Globe icon by Nick Novell from the [Noun Project](https://thenounproject.com/)
+ * Many thanks to Yahya Elharony for his [YouTube series](https://www.youtube.com/watch?v=ywdxLNjhBYw&t=134s) on using the Google Maps JavaScript API in a React application without any third party libraries. 
 
 
 ## Create React App
