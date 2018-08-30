@@ -214,13 +214,24 @@ class Main extends Component {
 
             // if so, assign the infowindow to that marker
             infowindow.marker = marker;
-            infowindow.setContent(
-                `<div class="infowindow">
-                    <img class="location-photo" src=${url} alt=${marker.title}>
-                    <p class="location-title">${marker.title}</p>
-                </div>`
-            );
 
+            // if the site image is unavailable, just show text
+            if (!url){
+                infowindow.setContent(
+                    `<div class="infowindow">
+                        <p class="location-title">${marker.title}</p>
+                    </div>`
+                );
+            } else {
+            // otherwise show the photo and the text
+                infowindow.setContent(
+                    `<div class="infowindow">
+                        <img class="location-photo" src=${url} alt=${marker.title}>
+                        <p class="location-title">${marker.title}</p>
+                    </div>`
+                );
+            }
+            
             // attach the info window to the specific marker that was clicked
             infowindow.open(this.map, marker);
         }      
