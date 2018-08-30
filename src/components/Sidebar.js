@@ -1,5 +1,6 @@
 import React from 'react'
 import '../App.css'
+import PropTypes from 'prop-types'
 
 function Sidebar (props) {
     
@@ -42,6 +43,14 @@ function Sidebar (props) {
             </ul>
         </div>
     )   
+}
+
+Sidebar.propTypes = {
+    onChange: PropTypes.func.isRequired,
+    onClick: PropTypes.func.isRequired,
+    onKeyPress: PropTypes.func.isRequired,
+    allSites: PropTypes.array.isRequired,
+    filteredSites: PropTypes.array.isRequired
 }
 
 export default Sidebar;
