@@ -37,8 +37,6 @@ body, html {
   font-size: 2em;
   font-weight: 400;
   letter-spacing: 1px;
- 
-  
 }
 
 .subheading { 
@@ -50,13 +48,14 @@ body, html {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  /* TODO: pick a color!!  */
   color: #D25248;
   color: #2a485f;
   color: black;
 }
 
 /******* Main *******/
-
 .main {
   display: grid; 
   padding: 20px;
@@ -96,7 +95,6 @@ body, html {
 
 
 /****** Sidebar ******/
-
 .sidebar {
   background: #fffcf9;
   border: 2px solid #0b3170;
@@ -121,6 +119,7 @@ body, html {
   padding: 8px 0 8px 5px;
   margin-bottom: 3px
 }
+
 
 /* apply different colored borders to the list items depending on site type */
 .cultural {
@@ -174,9 +173,8 @@ body, html {
   text-align: center;
   font-weight: 300;
   display: grid;
-
-  margin-top: auto;
 }
+
 
 .quote {
   color: #EDD270;
@@ -184,14 +182,17 @@ body, html {
   letter-spacing: 1px;
 }
 
+
 .learn-more {
   font-size: 1.1rem;
 }
+
 
 .api-attribution {
   align-items: flex-end;
   font-size: .9rem;
 }
+
 
 .footer a {
   color: #B5C48B;
@@ -199,9 +200,11 @@ body, html {
   transition: color .2s ease;
 }
 
+
 .footer a:hover, .footer a:focus {
   color: orange;
 }
+
 
 /****** Error Message if Google maps doesn't work ******/
 .error {
@@ -219,6 +222,7 @@ body, html {
     grid-template-columns: auto 1fr;
   }
 
+  
   .quote {
     max-width: 60%;
     margin: 17.6px auto;
