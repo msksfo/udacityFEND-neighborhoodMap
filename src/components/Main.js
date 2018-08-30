@@ -25,7 +25,7 @@ class Main extends Component {
         } 
     }
 
-
+    // as soon as the component is mounted, begin ajax request for flickr photos
     componentDidMount(){
         this.getPhotos();
     }
@@ -86,12 +86,13 @@ class Main extends Component {
         // load the map if the google maps api is available
         if (window.google){
             let infowindow = new window.google.maps.InfoWindow();
+
             this.map = new window.google.maps.Map(document.getElementById('map'), {
             zoom: zoom,
             center: {lat: 0, lng: 0},
             gestureHandling: 'cooperative'
             });
-            // TODO: make function for initial markers?
+            
             this.setState({map: this.map, infowindow: infowindow})
             this.placeInitialMarkers(sites)
         } else {
@@ -237,6 +238,7 @@ class Main extends Component {
         }      
     }
 
+
     toggleSidebar = (e) => {
         // when the globe icon is clicked, toggle the visibility of the sidebar
         const sidebarState = this.state.sidebarShowing;
@@ -306,8 +308,7 @@ class Main extends Component {
 
          // find the marker corresponding to the site that triggered the event
          const index = markers.findIndex( (value) => value.title === e.target.textContent)
-         
-            
+                    
          // find the site with the name matching the text content of the clicked list item, to get the image source for the infowindow
          const sites = this.state.sites;
          const site = sites.find(value => value.name === e.target.textContent)
@@ -327,6 +328,7 @@ class Main extends Component {
         }              
     }
 
+
     // apply bounce animation on marker when sidebar list item is chosen
     animateMarker(marker){
         marker.setAnimation(window.google.maps.Animation.BOUNCE)
@@ -343,7 +345,6 @@ class Main extends Component {
     }
 
 
-
     render(){
        if (this.state.mapError){
            return <Error />    
@@ -352,11 +353,14 @@ class Main extends Component {
                 <main className="main">      
                         
                     <p className="unesco-intro">
-                        <button onClick={this.toggleSidebar}  className="menu-icon-button">
-                            {/* Globe by Nick Novell from the Noun Project */}
+                        <button onClick={this.toggleSidebar}
+                                className="menu-icon-button"
+                                aria-label="menu"
+                        >
+                            {/* Globe icon by Nick Novell from the Noun Project */}
                             <img className="globe" src={globe} alt="Menu icon"/>
                         </button>
-                        Click the globe to toggle the list of sites
+                        Click the globe to view and filter the list of sites
                     </p>
 
                     { this.state.sidebarShowing
@@ -391,24 +395,4 @@ function loadScript(src){
     // make sure this script will always be the first script
     index.parentNode.insertBefore(script, index)
   
-  }
-/*
-    <p className="unesco-intro">
-        <button onClick={this.toggleSidebar}  className="menu-icon-button">
-           
-            <img className="globe" src={globe} alt="Menu icon"/>
-        </button>
-        Click the globe to toggle the list of sites
-    </p>
-
-    { this.state.sidebarShowing
-    ? <Sidebar allSites={this.state.sites} filteredSites={this.state.filteredSites} onKeyPress={this.handleListItemEvent} onClick={this.handleListItemEvent} onChange={this.handleChange}/>
-    : <div></div>
-    }
-
-    <div tabIndex="0" id="map" className='map' aria-label="map" role="application"></div> 
-    */
-
-    {/* Globe by Nick Novell from the Noun Project */}
-
-    
+}
