@@ -2,15 +2,9 @@
 
 body, html {
  box-sizing: border-box;
-  min-height: 100vh;
-  
+ min-height: 100vh;
 }
 
-.app {
-  display: grid;
-  grid-template-columns: 1fr;
-  
-}
 
 /******** Header  TODO: add photo grid  as background image  *******/
 .header {
@@ -64,7 +58,7 @@ body, html {
 /******* Main *******/
 
 .main {
-  display: grid;
+  display: grid; 
   padding: 20px;
 }
 
@@ -75,6 +69,7 @@ body, html {
 }
 
 .unesco-intro {
+  grid-column: 1 / -1;
   display: flex;
   align-items: center;
 }
@@ -106,20 +101,8 @@ body, html {
   background: #fffcf9;
   border: 2px solid #0b3170;
   padding: 10px;
-  
-/*
-  display: none;
-  height: 0;
-  padding: 0;
-  border: none;
-  */
 }
 
-.showSidebar {
-  display: block;
-  height: 100%;
-  padding: 10px;
-}
 
 .sidebar-select {
  height: 30px;
@@ -131,19 +114,42 @@ body, html {
 .sidebar-list {
   list-style: none;
   padding: 0;
-  border: 1px solid pink
+  
 }
 
 .sidebar-listItem {
-  border: 1px solid purple;
-  padding: 8px 0;
+  padding: 8px 0 8px 5px;
+  margin-bottom: 3px
 }
 
-.sidebar-listItem:hover {
-  background-color: #333;
-  color: #fff;
+/* apply different colored borders to the list items depending on site type */
+.cultural {
+  border-left: 3px solid #faff02;
+}
+
+.cultural:hover, .cultural:focus {
+  border: 3px solid #faff02;
   cursor: pointer;
 }
+
+.natural {
+  border-left: 3px solid #24d046;
+}
+
+.natural:hover, .natural:focus {
+  cursor: pointer;
+  border: 3px solid  #24d046;
+}
+
+.mixed {
+  border-left: 3px solid #ee6c3a;
+}
+
+.mixed:hover, .mixed:focus {
+  cursor: pointer;
+  border: 3px solid #ee6c3a;
+}
+
 
 
 /****** Infowindow TODO: style the infowindow - solid color bar at top? natural-green, cultural-blue, etc  ******/
@@ -159,10 +165,64 @@ body, html {
   margin-top: 0;
 }
 
-/*
+
+/****** Footer ******/
+.footer {
+  padding: 4rem 1rem;
+  color: #FFFCF9;
+  background-color: #363636;
+  text-align: center;
+  font-weight: 300;
+  display: grid;
+
+  margin-top: auto;
+}
+
+.quote {
+  color: #EDD270;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+}
+
+.learn-more {
+  font-size: 1.1rem;
+}
+
+.api-attribution {
+  align-items: flex-end;
+  font-size: .9rem;
+}
+
+.footer a {
+  color: #B5C48B;
+  text-decoration: none;
+  transition: color .2s ease;
+}
+
+.footer a:hover, .footer a:focus {
+  color: orange;
+}
+
+/****** Error Message if Google maps doesn't work ******/
+.error {
+  text-align: center;
+  font-size: 1.3rem;
+  
+  padding: 20px 10px;
+  margin: 50px 0;
+}
+
+
+/****** Media Queries ******/
 @media screen and (min-width: 900px){
-  .wrapper{
+  .main {
     grid-template-columns: auto 1fr;
   }
+
+  .quote {
+    max-width: 60%;
+    margin: 17.6px auto;
+  }
+
 }
-*/
+

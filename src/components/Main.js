@@ -3,6 +3,7 @@ import '../App.css';
 import Sidebar from './Sidebar';
 import * as Sites from '../sites.json';
 import globe from '../images/globe.png';
+import Error from './Error';
 
 
 // TODO: make api file, like in myReads project
@@ -19,7 +20,8 @@ class Main extends Component {
             filteredMarkers: [],
             infowindow: {},
             map: {},
-            sidebarShowing: false
+            sidebarShowing: false,
+            mapError: true
         } 
     }
 
@@ -333,25 +335,30 @@ class Main extends Component {
 
 
     render(){
-        
-        return (
-            <main className="main">
-                <p className="unesco-intro">
+       if (this.state.mapError){
+           return <Error />    
+       } else {
+            return (
+                <main className="main">      
+                        
+                    <p className="unesco-intro">
                     <button onClick={this.toggleSidebar}  className="menu-icon-button">
                         {/* Globe by Nick Novell from the Noun Project */}
                         <img className="globe" src={globe} alt="Menu icon"/>
-                    </button>
-                    CLick the globe to toggle the list of sites
-                </p>
-                
-                { this.state.sidebarShowing
-                 ? <Sidebar allSites={this.state.sites} filteredSites={this.state.filteredSites} onKeyPress={this.handleListItemEvent} onClick={this.handleListItemEvent} onChange={this.handleChange}/>
-                 : <div></div>
-                }
+                        </button>
+                    Click the globe to toggle the list of sites
+                    </p>
 
-                <div tabIndex="0" id="map" className='map' aria-label="map" role="application"></div> 
-            </main>
-        )
+                    { this.state.sidebarShowing
+                        ? <Sidebar allSites={this.state.sites} filteredSites={this.state.filteredSites} onKeyPress={this.handleListItemEvent} onClick={this.handleListItemEvent} onChange={this.handleChange}/>
+                        : <div></div>
+                    }
+        
+                    <div tabIndex="0" id="map" className='map' aria-label="map" role="application"></div>
+                    
+                </main>
+            )
+        }
          
     }
 }
@@ -371,3 +378,23 @@ function loadScript(src){
     index.parentNode.insertBefore(script, index)
   
   }
+/*
+    <p className="unesco-intro">
+        <button onClick={this.toggleSidebar}  className="menu-icon-button">
+           
+            <img className="globe" src={globe} alt="Menu icon"/>
+        </button>
+        Click the globe to toggle the list of sites
+    </p>
+
+    { this.state.sidebarShowing
+    ? <Sidebar allSites={this.state.sites} filteredSites={this.state.filteredSites} onKeyPress={this.handleListItemEvent} onClick={this.handleListItemEvent} onChange={this.handleChange}/>
+    : <div></div>
+    }
+
+    <div tabIndex="0" id="map" className='map' aria-label="map" role="application"></div> 
+    */
+
+    {/* Globe by Nick Novell from the Noun Project */}
+
+    

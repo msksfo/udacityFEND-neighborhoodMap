@@ -3,10 +3,10 @@ import '../App.css'
 
 class Sidebar extends Component {
     
-    
     render(){
         const allSites = this.props.allSites;
         const filteredSites = this.props.filteredSites;
+
 
         return (
             // filter by type of site
@@ -20,16 +20,27 @@ class Sidebar extends Component {
 
                 {/* if the user has filtered the sites, show the filtered sites. otherwise show all of the sites */}
                 <ul id="sidebar-list" className="sidebar-list" onKeyPress={this.props.onKeyPress} onClick={this.props.onClick} >
-                { filteredSites.length !== 0  
-                    ? filteredSites.map(site => {   
-                        return <li  tabIndex="0" className="sidebar-listItem" key={site.name}>
-                            {site.name}
-                        </li> })    
-                    : allSites.map(site => {
-                        return <li tabIndex="0" className="sidebar-listItem" key={site.name}>
-                            {site.name}
-                        </li>})
-                }  
+                    {
+                        filteredSites.length !== 0 
+                        ? filteredSites.map( site => {
+                            if (site.type === 'natural'){
+                                return <li tabIndex="0" key={site.name} className={'sidebar-listItem natural'}>{site.name}</li>                         
+                            } else if (site.type === 'cultural'){
+                                return <li tabIndex="0" key={site.name} className={'sidebar-listItem cultural'}>{site.name}</li>
+                            } else {
+                                return <li tabIndex="0" key={site.name} className={'sidebar-listItem mixed'}>{site.name}</li>
+                            }
+                        })
+                        : allSites.map( site => {
+                            if (site.type === 'natural'){
+                                return <li tabIndex="0" key={site.name} className={'sidebar-listItem natural'}>{site.name}</li>                         
+                            } else if (site.type === 'cultural'){
+                                return <li tabIndex="0" key={site.name} className={'sidebar-listItem cultural'}>{site.name}</li>
+                            } else {
+                                return <li tabIndex="0" key={site.name} className={'sidebar-listItem mixed'}>{site.name}</li>
+                            }
+                        })
+                    }
                 </ul>
             </div>
         )
@@ -37,43 +48,4 @@ class Sidebar extends Component {
 }
 
 export default Sidebar;
-/*
-{ filteredSites.length !== 0  
-    ? filteredSites.map(site => {   
-        return <li className="sidebar-listItem" key={site.name}>
-            {site.name}
-        </li> })    
-    : allSites.map(site => {
-        return <li className="sidebar-listItem" key={site.name}>
-            {site.name}
-        </li>})
-}  
-*/
 
-/*
-{( () => {
-    if (filteredSites.length !== 0){
-        filteredSites.map( site => {
-            if (site.type === 'natural'){
-                return <li className="sidebar-listItem naturalSite">{site.name}</li>                         
-            } else if (site.type === 'cultural'){
-                return <li className="sidebar-listItem culturalSite">{site.name}</li>
-            } else {
-                return <li className="sidebar-listItem mixedSite">{site.name}</li>
-            }
-        })
-    }else {
-        allSites.map( site => {
-            if (site.type === 'natural'){
-                return <li className="sidebar-listItem naturalSite">{site.name}</li>                         
-            } else if (site.type === 'cultural'){
-                return <li className="sidebar-listItem culturalSite">{site.name}</li>
-            } else {
-                return <li className="sidebar-listItem mixedSite">{site.name}</li>
-            }
-        })
-    }
-}
-
-)()}
-*/
