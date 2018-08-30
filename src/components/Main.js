@@ -21,12 +21,46 @@ class Main extends Component {
             infowindow: {},
             map: {},
             sidebarShowing: false,
-            mapError: true
+            mapError: false
         } 
     }
 
+
     componentDidMount(){
         this.getPhotos();
+    }
+
+
+    getPhotos = () => {
+        // use flickr api to get the source url for each location photo
+        let sites = this.state.sites;
+        const key = '25a8dff4a6f0efab5e05292f9f665372';
+
+        // this will return an array of promises
+        const promises = sites.map( value => {
+            return fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.getSizes&api_key=${key}&photo_id=${value.photoId}&format=json&nojsoncallback=1`)
+            .then(function(response){
+                if (response.ok){
+                return response.json()
+                }
+            })
+            .then(data => {
+                // get the large square thumbnail image
+                return data.sizes.size[1].source   
+            })
+            .catch(err => console.log('error: ', err))
+            })
+        
+        // resolve all promises and attach the url to each location object
+        Promise.all(promises)
+            .then( data => {
+                data.forEach((value, index) => sites[index].photoSrc = value)})
+            .catch(err => console.log('Error: ', err))
+
+        /* 1. first update the sites' state to include the dynamic data (photo urls),
+           2. THEN load the script and map to the page
+        */
+        this.setState({sites: sites}, this.renderMap)
     }
 
 
@@ -45,7 +79,7 @@ class Main extends Component {
         let zoom = Math.ceil(Math.log2(window.innerWidth)) - 8.69;
         /* 
         zoom calculation by Adam Thomas
-        * this is to have a map of the entire world without repeating countries, as much     as is possible
+        * this is to have a map of the entire world without repeating countries, as much as is possible
         https://stackoverflow.com/questions/9893680/google-maps-api-v3-show-the-whole-world
         */
 
@@ -61,14 +95,14 @@ class Main extends Component {
             this.setState({map: this.map, infowindow: infowindow})
             this.placeInitialMarkers(sites)
         } else {
-            console.log('there was a problem')
-        }
-            
+            // if google map fails, mapError: true will cause the Error component to be rendered
+            this.setState({mapError: true})
+        }       
     }
 
     
     placeInitialMarkers = (sitesArray) =>  {
-        var bounds = new window.google.maps.LatLngBounds();
+        const bounds = new window.google.maps.LatLngBounds();
         let markers = this.state.markers;
         let marker;
         
@@ -76,63 +110,48 @@ class Main extends Component {
            2. add click event listener on each marker
         */
    
-        sitesArray.forEach(value => {
-            if (value.markerShowing){
-                if (value.type === 'cultural'){
-                    marker = new window.google.maps.Marker({
-                        position: value.coords,
-                        map: this.state.map,
-                        title: value.name,
-                        photoId: value.photoId,
-                        icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
-                    })
-                    bounds.extend(marker.position)
-                    markers.push(marker)
-                    marker.addListener('click', this.onMarkerClick) 
-                } else if (value.type === 'natural'){
-                    marker = new window.google.maps.Marker({
-                        position: value.coords,
-                        map: this.state.map,
-                        title: value.name,
-                        photoId: value.photoId,
-                        icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
-                    })
-                    bounds.extend(marker.position)
-                    markers.push(marker)
-                    marker.addListener('click', this.onMarkerClick) 
-                } else {
-                    marker = new window.google.maps.Marker({
-                        position: value.coords,
-                        map: this.state.map,
-                        title: value.name,
-                        photoId: value.photoId,
-                        icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
-                    })
-                    bounds.extend(marker.position)
-                    markers.push(marker)
-                    marker.addListener('click', this.onMarkerClick) 
-                }
-            }
+        sitesArray.forEach(value => {    
+            if (value.type === 'cultural'){
+                marker = new window.google.maps.Marker({
+                    position: value.coords,
+                    map: this.state.map,
+                    title: value.name,
+                    photoId: value.photoId,
+                    icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
+                })
+                bounds.extend(marker.position)
+                markers.push(marker)
+                marker.addListener('click', this.onMarkerClick) 
+            } else if (value.type === 'natural'){
+                marker = new window.google.maps.Marker({
+                    position: value.coords,
+                    map: this.state.map,
+                    title: value.name,
+                    photoId: value.photoId,
+                    icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+                })
+                bounds.extend(marker.position)
+                markers.push(marker)
+                marker.addListener('click', this.onMarkerClick) 
+            } else {
+                marker = new window.google.maps.Marker({
+                    position: value.coords,
+                    map: this.state.map,
+                    title: value.name,
+                    photoId: value.photoId,
+                    icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+                })
+                bounds.extend(marker.position)
+                markers.push(marker)
+                marker.addListener('click', this.onMarkerClick) 
+            }    
         })
     
          this.map.fitBounds(bounds); 
          this.setState({markers: markers}) 
     }
 
-    placeFilteredMarkers(sitesArray){
-        let markers = this.state.markers;
-       
-        sitesArray.forEach( (value, index) => {
-            if (!value.markerShowing){
-            markers[index].setMap(null)
-            } else {
-                markers[index].setMap(this.state.map)
-            }  
-        })
-    }
-
     
-
     onMarkerClick = (e) => {
         // get the coordinates of the marker that was clicked
         const lat = e.latLng.lat()
@@ -185,6 +204,7 @@ class Main extends Component {
         */
     }
 
+
     // Fill the infowindow with the site photo and information
     populateInfowindow(marker, url) {
         let infowindow = this.state.infowindow;
@@ -203,41 +223,27 @@ class Main extends Component {
 
             // attach the info window to the specific marker that was clicked
             infowindow.open(this.map, marker);
-        } 
-           
+        }      
     }
 
-    getPhotos = () => {
-        // use flickr api to get the source url for each location photo
-        let sites = this.state.sites;
-        const key = '25a8dff4a6f0efab5e05292f9f665372';
+    toggleSidebar = (e) => {
+        // when the globe icon is clicked, toggle the visibility of the sidebar
+        const sidebarState = this.state.sidebarShowing;
 
-        // this will return an array of promises
-        const promises = sites.map( value => {
-            return fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.getSizes&api_key=${key}&photo_id=${value.photoId}&format=json&nojsoncallback=1`)
-            .then(function(response){
-                if (response.ok){
-                return response.json()
-                }
+        // if there is an infowindow open, close it
+        const infowindow = this.state.infowindow;
+        infowindow.close();
+   
+        if (!sidebarState){
+          this.setState({
+              sidebarShowing: true
+          })
+        } else {
+            this.setState({
+                sidebarShowing: false
             })
-            .then(data => {
-                // get the large square thumbnail image
-                return data.sizes.size[1].source   
-            })
-            .catch(err => console.log('error: ', err))
-            })
-        
-        // resolve all promises and attach the url to each location object
-        Promise.all(promises)
-            .then( data => {
-                data.forEach((value, index) => sites[index].photoSrc = value)})
-            .catch(err => console.log('Error: ', err))
-
-        /* 1. first update the sites' state to include the dynamic data (photo urls),
-           2. THEN load the script and map to the page
-        */
-        this.setState({sites: sites}, this.renderMap)
-    }
+        }
+     }
 
 
     // use the select element to filter sites by type
@@ -269,21 +275,20 @@ class Main extends Component {
     }
 
 
-    // apply drop animation on marker when sidebar list item is chosen
-    animateMarker(marker){
-        marker.setAnimation(window.google.maps.Animation.BOUNCE)
-
-        setTimeout(() => {
-            this.removeAnimation(marker)
-        }, 1500)
+    placeFilteredMarkers(sitesArray){
+        let markers = this.state.markers;
+       
+        sitesArray.forEach( (value, index) => {
+            if (!value.markerShowing){
+            markers[index].setMap(null)
+            } else {
+                markers[index].setMap(this.state.map)
+            }  
+        })
     }
 
-    removeAnimation(marker){
-        marker.setAnimation(null)
-    }
 
-
-    // click or tab onto one of the sites in the sidebar list of sites
+    // handle user clicking or tabbing onto one of the sites in the sidebar list of sites
     handleListItemEvent = (e) => {
         const key = e.key;
         const markers = this.state.markers;
@@ -298,8 +303,6 @@ class Main extends Component {
          const photoUrl = site.photoSrc;
 
          this.animateMarker(markers[index])
-         console.log(markers[index].getAnimation())
-         
         
         // account for keypress event
         if (key){
@@ -313,25 +316,21 @@ class Main extends Component {
         }              
     }
 
-    
-    toggleSidebar = (e) => {
-        // when the globe icon is clicked, toggle the visibility of the sidebar
-        const sidebarState = this.state.sidebarShowing;
+    // apply bounce animation on marker when sidebar list item is chosen
+    animateMarker(marker){
+        marker.setAnimation(window.google.maps.Animation.BOUNCE)
 
-        // if there is an infowindow open, close it
-        const infowindow = this.state.infowindow;
-        infowindow.close();
-   
-        if (!sidebarState){
-          this.setState({
-              sidebarShowing: true
-          })
-        } else {
-            this.setState({
-                sidebarShowing: false
-            })
-        }
-     }
+        setTimeout(() => {
+            this.removeAnimation(marker)
+        }, 1500)
+    }
+
+
+    // stop the marker bounce animation
+    removeAnimation(marker){
+        marker.setAnimation(null)
+    }
+
 
 
     render(){
@@ -342,15 +341,20 @@ class Main extends Component {
                 <main className="main">      
                         
                     <p className="unesco-intro">
-                    <button onClick={this.toggleSidebar}  className="menu-icon-button">
-                        {/* Globe by Nick Novell from the Noun Project */}
-                        <img className="globe" src={globe} alt="Menu icon"/>
+                        <button onClick={this.toggleSidebar}  className="menu-icon-button">
+                            {/* Globe by Nick Novell from the Noun Project */}
+                            <img className="globe" src={globe} alt="Menu icon"/>
                         </button>
-                    Click the globe to toggle the list of sites
+                        Click the globe to toggle the list of sites
                     </p>
 
                     { this.state.sidebarShowing
-                        ? <Sidebar allSites={this.state.sites} filteredSites={this.state.filteredSites} onKeyPress={this.handleListItemEvent} onClick={this.handleListItemEvent} onChange={this.handleChange}/>
+                        ? <Sidebar allSites={this.state.sites}
+                                   filteredSites={this.state.filteredSites} 
+                                   onKeyPress={this.handleListItemEvent} 
+                                   onClick={this.handleListItemEvent} 
+                                   onChange={this.handleChange}
+                            />
                         : <div></div>
                     }
         
@@ -358,8 +362,7 @@ class Main extends Component {
                     
                 </main>
             )
-        }
-         
+        }     
     }
 }
 
