@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import Header from './components/Header';
-
 import Main from './components/Main';
+import Footer from './components/Footer';
 
 
 class App extends Component {
@@ -19,6 +19,9 @@ class App extends Component {
         <Header />
 
         <Main />
+
+        <Footer />
+
       </div>
     );
   }
@@ -26,4 +29,3 @@ class App extends Component {
 
 export default App
 
-//TODO: add api attribution
