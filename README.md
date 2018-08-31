@@ -20,6 +20,8 @@ This project was very challenging, but along the way I really solidified my unde
 ## Offline First
 By using Create React App, the production build is a fully functional, offline-first Progressive Web App. `npm run build` will create a build directory with the production build of your app. 
 
+The service worker is functional on the production build only. If you need to test the service worker during development, you can refer to the [Create React App](https://github.com/facebookincubator/create-react-app) documentaion here.
+
 
 ## Use the app
 * Click a map marker to see a photo of the site
