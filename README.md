@@ -17,6 +17,9 @@ This project was very challenging, but along the way I really solidified my unde
 * install all project dependencies with `npm install`
 * run `npm start` in the project root directory to start the development server and launch the   app in the browser window
 
+## Offline First
+By using Create React App, the production build is a fully functional, offline-first Progressive Web App. `npm run build` will create a build directory with the production build of your app. 
+
 
 ## Use the app
 * Click a map marker to see a photo of the site
