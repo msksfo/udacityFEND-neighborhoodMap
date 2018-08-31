@@ -8,9 +8,9 @@ body, html {
 
 /******** Header  TODO: add photo grid  as background image  *******/
 .header {
-  background-color: white;
+  
   /*height: 150px;  TODO:  height should not be hard coded */
-
+/*
   padding: 20px;
   color: #333;;
   
@@ -21,44 +21,181 @@ body, html {
 
   display: flex;
   justify-content: center;
+  */
+  
+
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(4, 55px);
+  
+  grid-template-areas: "photo1 photo2 photo3 photo4 photo5 photo6 photo7"
+                       "photo8 titleDiv titleDiv titleDiv titleDiv titleDiv photo9"
+                       "photo10 titleDiv titleDiv titleDiv titleDiv titleDiv photo11"
+                       "photo12 photo13 photo14 photo15 photo16 photo17 photo18"
 }
 
 
 .title-div{
-  padding: 10px 25px;
-  background-color: rgba(255, 255, 255, .9);
-  border-radius: 5px;
-  border: 1.2px solid #D25248;
+  grid-area: titleDiv;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 
 .title {
+  /* TODO: pick a pretty font */
   text-align: center;
-  font-size: 2em;
-  font-weight: 400;
-  letter-spacing: 1px;
-}
-
-.subheading { 
-  font-size: 1.5rem;
-  font-weight: 400;
+  letter-spacing: 1.8px;
+  font-size: 1.7rem;
   font-family: cursive;
-  letter-spacing: 1px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  /* TODO: pick a color!!  */
-  color: #D25248;
-  color: #2a485f;
-  color: black;
+  font-weight: 500;
 }
+
+
+/** header photos **/
+.photo1 {
+  grid-area: photo1;
+  background-image: url('./images/iran.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.photo2 {
+  grid-area: photo2;
+  background-image: url('./images/peru.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.photo3 {
+  grid-area: photo3;
+  background-image: url('./images/prague.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.photo4 {
+  grid-area: photo4;
+  background-image: url('./images/egypt.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.photo5 {
+  grid-area: photo5;
+  background-image: url('./images/torres.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.photo6 {
+  grid-area: photo6;
+  background-image: url('./images/russia.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.photo7 {
+  grid-area: photo7;
+  background-image: url('./images/elephants.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.photo8 {
+  grid-area: photo8;
+  background-image: url('./images/tajmahal.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.photo9 {
+  grid-area: photo9;
+  background-image: url('./images/fitzroy.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.photo10 {
+  grid-area: photo10;
+  background-image: url('./images/prayerflags.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.photo11 {
+  grid-area: photo11;
+  background-image: url('./images/operahouse.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.photo12 {
+  grid-area: photo12;
+  background-image: url('./images/petra.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.photo13 {
+  grid-area: photo13;
+  background-image: url('./images/venice.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.photo14 {
+  grid-area: photo14;
+  background-image: url('./images/greece.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.photo15 {
+  grid-area: photo15;
+  background-image: url('./images/vigan.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.photo16 {
+  grid-area: photo16;
+  background-image: url('./images/trinidad.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.photo17 {
+  grid-area: photo17;
+  background-image: url('./images/iguazu.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.photo18 {
+  grid-area: photo18;
+  background-image: url('./images/siemreap2.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
 
 /******* Main *******/
 .main {
   display: grid; 
   padding: 20px;
+}
+
+.subheading {
+  margin: 12px 0;
+  grid-column: 1 / -1;
+  font-size: 1.3rem;
+  font-weight: 400;
+ 
+  /* TODO: pick a color!!  */
+  color: #111;
 }
 
 .globe {
@@ -217,12 +354,20 @@ body, html {
 
 
 /****** Media Queries ******/
+@media screen and (min-width: 600px){
+  .title {
+    font-size: 2rem;
+    letter-spacing: 2px;
+  }
+}
+
+
 @media screen and (min-width: 900px){
   .main {
     grid-template-columns: auto 1fr;
   }
 
-  
+
   .quote {
     max-width: 60%;
     margin: 17.6px auto;
