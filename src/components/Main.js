@@ -351,7 +351,7 @@ class Main extends Component {
        } else {
             return (
                 <main className="main">      
-                        
+                    <h2 className='subheading'>Explore the UNESCO World Heritage Sites</h2>
                     <p className="unesco-intro">
                         <button onClick={this.toggleSidebar}
                                 className="menu-icon-button"
