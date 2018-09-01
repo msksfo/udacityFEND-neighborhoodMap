@@ -1,9 +1,8 @@
-
-
 body, html {
  box-sizing: border-box;
  min-height: 100vh;
 }
+
 
 :root {
   --mixed-orange: #ee6c3a;
@@ -11,25 +10,8 @@ body, html {
   --cultural-yellow: #faff02;
 }
 
-
-/******** Header  TODO: add photo grid  as background image  *******/
+/******************* header *********************/
 .header {
-  
-  /*height: 150px;  TODO:  height should not be hard coded */
-/*
-  padding: 20px;
-  color: #333;;
-  
-  background-image: url('./images/backgroundPattern.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-
-  display: flex;
-  justify-content: center;
-  */
-  
-
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: repeat(4, 55px);
@@ -50,7 +32,6 @@ body, html {
 
 
 .title {
-  /* TODO: pick a pretty font */
   text-align: center;
   letter-spacing: 1.8px;
   font-size: 1.7rem;
@@ -188,7 +169,7 @@ body, html {
 }
 
 
-/******* Main *******/
+/*********************** Main ***********************/
 .main {
   display: grid; 
   padding: 20px;
@@ -199,10 +180,9 @@ body, html {
   grid-column: 1 / -1;
   font-size: 1.3rem;
   font-weight: 400;
- 
-  /* TODO: pick a color!!  */
   color: #111;
 }
+
 
 .globe {
   width: 50px;
@@ -210,18 +190,21 @@ body, html {
   padding-top: 4px;
 }
 
+
 .unesco-intro {
   grid-column: 1 / -1;
   display: flex;
   align-items: center;
 }
 
-.menu-icon-button { /* toggles sidebar open/closed */
+
+.menu-icon-button { /* surrounds the globe icon. toggles sidebar open/closed */
   border: none;
   background-color: transparent;
   transition: .2s ease;
   margin-right: 5px;
 }
+
 
 .menu-icon-button:hover, .menu-icon-button:focus {
   cursor: pointer;
@@ -237,7 +220,7 @@ body, html {
 }
 
 
-/****** Sidebar ******/
+/************************ Sidebar ************************/
 .sidebar {
   background: #fffcf9;
   border: 2px solid #0b3170;
@@ -258,6 +241,7 @@ body, html {
   
 }
 
+
 .sidebar-listItem {
   padding: 8px 0 8px 5px;
   margin-bottom: 3px
@@ -269,29 +253,33 @@ body, html {
   border-left: 3px solid var(--cultural-yellow);
 }
 
+
 .cultural:hover, .cultural:focus {
   border: 3px solid var(--cultural-yellow);
   cursor: pointer;
 }
 
+
 .natural {
   border-left: 3px solid var(--natural-green);
 }
+
 
 .natural:hover, .natural:focus {
   cursor: pointer;
   border: 3px solid  var(--natural-green);
 }
 
+
 .mixed {
   border-left: 3px solid var(--mixed-orange);
 }
+
 
 .mixed:hover, .mixed:focus {
   cursor: pointer;
   border: 3px solid var(--mixed-orange);
 }
-
 
 
 /******************** Infowindow ********************/
@@ -421,14 +409,13 @@ body, html {
 /****** Error Message if Google maps doesn't work ******/
 .error {
   text-align: center;
-  font-size: 1.3rem;
-  
+  font-size: 1.3rem;  
   padding: 20px 10px;
   margin: 50px 0;
 }
 
 
-/****** Media Queries ******/
+/************************ Media Queries *********************/
 @media screen and (min-width: 600px){
   .title {
     font-size: 2rem;
@@ -441,7 +428,6 @@ body, html {
   .main {
     grid-template-columns: auto 1fr;
   }
-
 
   .quote {
     max-width: 60%;
