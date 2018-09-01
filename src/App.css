@@ -5,6 +5,12 @@ body, html {
  min-height: 100vh;
 }
 
+:root {
+  --mixed-orange: #ee6c3a;
+  --natural-green: #24d046;
+  --cultural-yellow: #faff02;
+}
+
 
 /******** Header  TODO: add photo grid  as background image  *******/
 .header {
@@ -260,45 +266,114 @@ body, html {
 
 /* apply different colored borders to the list items depending on site type */
 .cultural {
-  border-left: 3px solid #faff02;
+  border-left: 3px solid var(--cultural-yellow);
 }
 
 .cultural:hover, .cultural:focus {
-  border: 3px solid #faff02;
+  border: 3px solid var(--cultural-yellow);
   cursor: pointer;
 }
 
 .natural {
-  border-left: 3px solid #24d046;
+  border-left: 3px solid var(--natural-green);
 }
 
 .natural:hover, .natural:focus {
   cursor: pointer;
-  border: 3px solid  #24d046;
+  border: 3px solid  var(--natural-green);
 }
 
 .mixed {
-  border-left: 3px solid #ee6c3a;
+  border-left: 3px solid var(--mixed-orange);
 }
 
 .mixed:hover, .mixed:focus {
   cursor: pointer;
-  border: 3px solid #ee6c3a;
+  border: 3px solid var(--mixed-orange);
 }
 
 
 
-/****** Infowindow TODO: style the infowindow - solid color bar at top? natural-green, cultural-blue, etc  ******/
+/******************** Infowindow ********************/
 .infowindow {
   display: flex;
 }
+
+
+/* let user scroll to see all infowindow content on mobile */
+.gm-style .gm-style-iw {
+  overflow: scroll;
+}
+
 
 .location-photo {
   margin-right: 10px;
 }
 
+
+.location-info {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+
 .location-title {
-  margin-top: 0;
+  margin: 0;
+  font-size: 1rem;
+  text-align: center;
+  padding: 0 2px 2px 2px;
+  color: #2a2a2a;
+}
+
+
+.location-location {
+  margin-bottom: 0;
+}
+
+
+.location-type {
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+
+/* underline the location-title with the color that matches the site type */
+.yellowBorder {
+  border-bottom: 2px solid  var(--cultural-yellow);
+}
+
+
+.greenBorder {
+  border-bottom: 2px solid var(--natural-green);
+}
+
+
+.redBorder {
+  border-bottom: 2px solid var(--mixed-orange);
+}
+
+
+.bullet {
+  font-size: 2rem;
+  margin-right: 4px;
+}
+
+
+/* color the bullet point to match the site type */
+.yellowBullet {
+  color: var(--cultural-yellow);
+}
+
+
+.greenBullet {
+  color: var(--natural-green);
+}
+
+
+.redBullet {
+  color: var(--mixed-orange);
 }
 
 
