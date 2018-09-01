@@ -33,7 +33,7 @@ class Main extends Component {
 
     getPhotos = () => {
         // use flickr api to get the source url for each location photo
-        let sites = this.state.sites;
+        const sites = this.state.sites;
         const key = '25a8dff4a6f0efab5e05292f9f665372';
 
         // this will return an array of promises
@@ -76,7 +76,7 @@ class Main extends Component {
     initMap = () => {
         const sites = this.state.sites;
 
-        let zoom = Math.ceil(Math.log2(window.innerWidth)) - 8.69;
+        const zoom = Math.ceil(Math.log2(window.innerWidth)) - 8.69;
         /* 
         zoom calculation by Adam Thomas
         * this is to have a map of the entire world without repeating countries, as much as is possible
@@ -85,7 +85,7 @@ class Main extends Component {
 
         // load the map if the google maps api is available
         if (window.google){
-            let infowindow = new window.google.maps.InfoWindow();
+            const infowindow = new window.google.maps.InfoWindow();
 
             this.map = new window.google.maps.Map(document.getElementById('map'), {
             zoom: zoom,
@@ -193,7 +193,7 @@ class Main extends Component {
 
     // Fill the infowindow with the site photo and information
     populateInfowindow(marker, url) {
-        let infowindow = this.state.infowindow;
+        const infowindow = this.state.infowindow;
         
         // first check to make sure a different marker is being clicked
         if(infowindow.marker !== marker){ 
@@ -284,7 +284,7 @@ class Main extends Component {
 
 
     placeFilteredMarkers(sitesArray){
-        let markers = this.state.markers;
+        const markers = this.state.markers;
        
         sitesArray.forEach( (value, index) => {
             if (!value.markerShowing){
@@ -391,39 +391,3 @@ function loadScript(src){
     index.parentNode.insertBefore(script, index)
   
 }
-/*
-if (value.type === 'cultural'){
-    marker = new window.google.maps.Marker({
-        position: value.coords,
-        map: this.state.map,
-        title: value.name,
-        photoId: value.photoId,
-        icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
-    })
-    bounds.extend(marker.position)
-    markers.push(marker)
-    marker.addListener('click', this.onMarkerClick) 
-} else if (value.type === 'natural'){
-    marker = new window.google.maps.Marker({
-        position: value.coords,
-        map: this.state.map,
-        title: value.name,
-        photoId: value.photoId,
-        icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
-    })
-    bounds.extend(marker.position)
-    markers.push(marker)
-    marker.addListener('click', this.onMarkerClick) 
-} else {
-    marker = new window.google.maps.Marker({
-        position: value.coords,
-        map: this.state.map,
-        title: value.name,
-        photoId: value.photoId,
-        icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
-    })
-    bounds.extend(marker.position)
-    markers.push(marker)
-    marker.addListener('click', this.onMarkerClick) 
-} 
-*/   
