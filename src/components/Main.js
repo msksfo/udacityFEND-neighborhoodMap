@@ -239,9 +239,11 @@ class Main extends Component {
     }
 
 
+    // when the globe icon is clicked, toggle the visibility of the sidebar
     toggleSidebar = (e) => {
-        // when the globe icon is clicked, toggle the visibility of the sidebar
         const sidebarState = this.state.sidebarShowing;
+        const sites = this.state.sites;
+        const filteredSites = this.state.filteredSites;
 
         // if there is an infowindow open, close it
         const infowindow = this.state.infowindow;
@@ -252,8 +254,16 @@ class Main extends Component {
               sidebarShowing: true
           })
         } else {
+            /* when the sidebar is closed, 
+               1. put all markers back on the map
+               2. put all sites back in the list view of sites
+            */
+            sites.map(value => value.markerShowing = true)
+            this.placeFilteredMarkers(sites)
+            filteredSites.length = 0;
             this.setState({
-                sidebarShowing: false
+                sidebarShowing: false,
+                filteredSites: filteredSites
             })
         }
      }
