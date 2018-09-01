@@ -104,8 +104,9 @@ class Main extends Component {
     
     placeInitialMarkers = (sitesArray) =>  {
         const bounds = new window.google.maps.LatLngBounds();
-        let markers = this.state.markers;
+        const markers = this.state.markers;
         let marker;
+        let icon;
         
         /* 1. loop over the list of sites to create a marker, colored according to site type, and add it to the map at the site coordinates
            2. add click event listener on each marker
@@ -113,39 +114,23 @@ class Main extends Component {
    
         sitesArray.forEach(value => {    
             if (value.type === 'cultural'){
-                marker = new window.google.maps.Marker({
-                    position: value.coords,
-                    map: this.state.map,
-                    title: value.name,
-                    photoId: value.photoId,
-                    icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
-                })
-                bounds.extend(marker.position)
-                markers.push(marker)
-                marker.addListener('click', this.onMarkerClick) 
+                icon = 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
             } else if (value.type === 'natural'){
-                marker = new window.google.maps.Marker({
-                    position: value.coords,
-                    map: this.state.map,
-                    title: value.name,
-                    photoId: value.photoId,
-                    icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
-                })
-                bounds.extend(marker.position)
-                markers.push(marker)
-                marker.addListener('click', this.onMarkerClick) 
+                icon = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
             } else {
-                marker = new window.google.maps.Marker({
-                    position: value.coords,
-                    map: this.state.map,
-                    title: value.name,
-                    photoId: value.photoId,
-                    icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
-                })
-                bounds.extend(marker.position)
-                markers.push(marker)
-                marker.addListener('click', this.onMarkerClick) 
-            }    
+                icon = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png' 
+            }
+            
+            marker = new window.google.maps.Marker({
+                position: value.coords,
+                map: this.state.map,
+                title: value.name,
+                photoId: value.photoId,
+                icon: icon
+            })
+            bounds.extend(marker.position)
+            markers.push(marker)
+            marker.addListener('click', this.onMarkerClick)
         })
     
          this.map.fitBounds(bounds); 
@@ -406,3 +391,39 @@ function loadScript(src){
     index.parentNode.insertBefore(script, index)
   
 }
+/*
+if (value.type === 'cultural'){
+    marker = new window.google.maps.Marker({
+        position: value.coords,
+        map: this.state.map,
+        title: value.name,
+        photoId: value.photoId,
+        icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
+    })
+    bounds.extend(marker.position)
+    markers.push(marker)
+    marker.addListener('click', this.onMarkerClick) 
+} else if (value.type === 'natural'){
+    marker = new window.google.maps.Marker({
+        position: value.coords,
+        map: this.state.map,
+        title: value.name,
+        photoId: value.photoId,
+        icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+    })
+    bounds.extend(marker.position)
+    markers.push(marker)
+    marker.addListener('click', this.onMarkerClick) 
+} else {
+    marker = new window.google.maps.Marker({
+        position: value.coords,
+        map: this.state.map,
+        title: value.name,
+        photoId: value.photoId,
+        icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+    })
+    bounds.extend(marker.position)
+    markers.push(marker)
+    marker.addListener('click', this.onMarkerClick) 
+} 
+*/   
