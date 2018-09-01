@@ -126,7 +126,9 @@ class Main extends Component {
                 map: this.state.map,
                 title: value.name,
                 photoId: value.photoId,
-                icon: icon
+                icon: icon,
+                location: value.location,
+                type: value.type
             })
             bounds.extend(marker.position)
             markers.push(marker)
@@ -194,7 +196,10 @@ class Main extends Component {
     // Fill the infowindow with the site photo and information
     populateInfowindow(marker, url) {
         const infowindow = this.state.infowindow;
-        
+
+        // use string methods to get the color of the marker icon
+        const color = marker.icon.substr(41).split('-')[0];
+
         // first check to make sure a different marker is being clicked
         if(infowindow.marker !== marker){ 
 
@@ -209,11 +214,17 @@ class Main extends Component {
                     </div>`
                 );
             } else {
-            // otherwise show the photo and the text
+            // otherwise show the photo and the location information
                 infowindow.setContent(
                     `<div class="infowindow">
                         <img class="location-photo" src=${url} alt=${marker.title}>
-                        <p class="location-title">${marker.title}</p>
+                        <div class="location-info">
+                            <p class="location-title ${color}Border">${marker.title}</p>
+                            <p class="location-location">${marker.location}</p>
+                            <p class="location-type">
+                                <span class="bullet ${color}Bullet">&bull;</span> ${marker.type} site
+                            </p>
+                        </div>
                     </div>`
                 );
             }
@@ -257,7 +268,7 @@ class Main extends Component {
     // use the select element to filter sites by type
     handleChange = (e) => {
         const allSites = this.state.sites;
-        let filtered = this.state.filteredSites;
+        let filtered = this.state.filteredSites; // why doesn't this work with const???
         const siteType = e.target.value;
         
         // if any infowindow was open, close it
