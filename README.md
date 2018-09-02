@@ -37,7 +37,8 @@ The service worker is functional on the production build only. If you need to te
  * Map by [Google Maps JavaScript API](https://developers.google.com/maps/documentation/javascript/tutorial)
  * Info window images obtained from the [Flickr API](https://www.flickr.com/services/api/)
  * Globe icon by Nick Novell from the [Noun Project](https://thenounproject.com/)
- * Many thanks to Yahya Elharony for his [YouTube series](https://www.youtube.com/watch?v=ywdxLNjhBYw&t=134s) on using the Google Maps JavaScript API in a React application without any third party libraries. 
+ * Many thanks to Yahya Elharony for his [YouTube series](https://www.youtube.com/watch?v=ywdxLNjhBYw&t=134s) on using the Google Maps JavaScript API in a React application without any third party libraries.
+ * Header font by Google Fonts 
 
 
 ## Create React App
