@@ -108,7 +108,7 @@ class Main extends Component {
         let marker;
         let icon;
         
-        /* 1. loop over the list of sites to create a marker, colored according to site type, and add it to the map at the site coordinates
+        /* 1. loop over the list of sites to create a marker (with properties needed for the infowindow) for each site, colored according to site type, and add it to the map at the site coordinates
            2. add click event listener on each marker
         */
    
