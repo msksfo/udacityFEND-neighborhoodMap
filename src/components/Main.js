@@ -6,9 +6,6 @@ import globe from '../images/globe.png';
 import Error from './Error';
 
 
-// TODO: make api file, like in myReads project
-
-
 class Main extends Component {
     constructor(props){
         super(props)
