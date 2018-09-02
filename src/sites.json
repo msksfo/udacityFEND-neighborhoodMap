@@ -1,56 +1,112 @@
 [
     {
-        "name": "Yosemite National Park",
-        "coords": {"lat": 37.8651, "lng":-119.5383},
-        "type": "natural",
-        "markerShowing": true,
-        "photoId": 43316542794,
-        "continent": "North America",
-        "photoSrc": ""
-    },
-    {
-        "name": "Machu Picchu", 
-        "coords": {"lat": -13.1631, "lng": -72.5450},
-        "type": "mixed",
-        "markerShowing": true,
-        "photoId": 29051779417,
-        "continent": "South America",
-        "photoSrc": ""
-    },
-    {
-        "name": "Serengeti National Park", 
-        "coords": {"lat": -2.333333, "lng": 34.833332},
-        "type": "natural",
-        "markerShowing": true,
-        "photoId": 42211340740,
-        "continent": "Africa",
-        "photoSrc": ""
-    },
-    {
-        "name": "Palau de la Musica Catalana", 
-        "coords": {"lat": 41.3876, "lng": 2.1753},
+        "name": "City of Bath", 
+        "location": "Bath, England",
+        "coords": {"lat": 51.3811, "lng": 2.3590},
         "type": "cultural",
         "markerShowing": true,
-        "photoId": 35203823512,
-        "continent": "Europe",
+        "photoId": 42353893660,
+        "inscribed": 1987,
         "photoSrc": ""
     },
     {
-        "name": "Great Barrier Reef", 
+        "name": "Cliff of Bandiagara",
+        "location": "Mopti Region, Mali", 
+        "coords": {"lat": 14.4278, "lng": 3.3253},
+        "type": "mixed",
+        "markerShowing": true,
+        "photoId": 9300463293,
+        "inscribed": 1989,
+        "photoSrc": ""
+    },
+    {
+        "name": "Great Barrier Reef",
+        "location": "Queensland, Australia", 
         "coords": {"lat": -18.156290, "lng": 147.485962},
         "type": "natural",
         "markerShowing": true,
         "photoId": 43524399412,
-        "continent": "Australia",
+        "inscribed": 1981,
         "photoSrc": ""
     },
     {
-        "name": "Yazd", 
+        "name": "Historic City of Yazd", 
+        "location": "Yazd, Iran",
         "coords": {"lat": 31.897423, "lng": 54.356857},
         "type": "cultural",
         "markerShowing": true,
         "photoId": 42165434924,
-        "continent": "Asia",
+        "inscribed": 2017,
+        "photoSrc": ""
+    },
+    {
+        "name": "Ilulissat Icefjord", 
+        "location": "Avannaata, Greenland",
+        "coords": {"lat": 69.21667, "lng": -51.1},
+        "type": "natural",
+        "markerShowing": true,
+        "photoId": 41204692990,
+        "inscribed": 2004,
+        "photoSrc": ""
+    },
+    {
+        "name": "Itsukushima Shrine", 
+        "location": "Hiroshima Prefecture, Japan",
+        "coords": {"lat": 34.2960, "lng": 132.3199},
+        "type": "cultural",
+        "markerShowing": true,
+        "photoId": 41058543462,
+        "inscribed": 1996,
+        "photoSrc": ""
+    },
+    {
+        "name": "Machu Picchu",
+        "location": "Urubamba Province, Peru", 
+        "coords": {"lat": -13.1631, "lng": -72.5450},
+        "type": "mixed",
+        "markerShowing": true,
+        "photoId": 29051779417,
+        "inscribed": 1983,
+        "photoSrc": ""
+    },
+    {
+        "name": "Palau de la Musica Catalana",
+        "location": "Barcelona, Spain", 
+        "coords": {"lat": 41.3876, "lng": 2.1753},
+        "type": "cultural",
+        "markerShowing": true,
+        "photoId": 35203823512,
+        "inscribed": 1997,
+        "photoSrc": ""
+    },
+    {
+        "name": "Plitvice Lakes National Park", 
+        "location": "Plitvice Lakes National Park, Croatia",
+        "coords": {"lat": 44.8654, "lng": 15.5820},
+        "type": "natural",
+        "markerShowing": true,
+        "photoId": 44236292422,
+        "inscribed": 1979,
+        "photoSrc": ""
+    },
+    {
+        "name": "Serengeti National Park",
+        "location": "Serengeti National Park, Tanzania", 
+        "coords": {"lat": -2.333333, "lng": 34.833332},
+        "type": "natural",
+        "markerShowing": true,
+        "photoId": 42211340740,
+        "inscribed": 1981,
+        "photoSrc": ""
+    },
+    {
+        "name": "Yosemite National Park",
+        "location": "California, USA",
+        "coords": {"lat": 37.8651, "lng":-119.5383},
+        "type": "natural",
+        "markerShowing": true,
+        "photoId": 43316542794,
+        "inscribed": 1984,
         "photoSrc": ""
     }
 ]

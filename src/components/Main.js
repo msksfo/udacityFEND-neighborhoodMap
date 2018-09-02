@@ -128,7 +128,8 @@ class Main extends Component {
                 photoId: value.photoId,
                 icon: icon,
                 location: value.location,
-                type: value.type
+                type: value.type,
+                date: value.inscribed
             })
             bounds.extend(marker.position)
             markers.push(marker)
@@ -155,41 +156,6 @@ class Main extends Component {
         const photoUrl = site.photoSrc;
 
         this.populateInfowindow(marker, photoUrl)
-
-        
-        /*
-        const searchQuery = marker.title;
-        
-        const endpoint = `https://api.flickr.com/services/rest/?method=flickr.photos.search&tags=${searchQuery}&api_key=${key}&format=json&per_page50&nojsoncallback=1&extras=url_q`
-        
-        const key = '25a8dff4a6f0efab5e05292f9f665372';
-        const photoId = marker.photoId;
-
-        const endpoint2 = `https://api.flickr.com/services/rest/?method=flickr.photos.getSizes&api_key=${key}&photo_id=${photoId}&format=json&nojsoncallback=1`
-
-
-       fetch(endpoint2)
-        .then(function(response){
-            if (response.ok){
-               return response.json()
-            }
-        })
-        .then(data => {
-            // get the large square thumbnail image
-            let photoUrl = data.sizes.size[1].source
-
-            // build the info window html content 
-            infowindow.setContent(
-                `<div class="infowindow">
-                    <img class="location-photo" src=${photoUrl} alt=${marker.title}>
-                    <p class="location-title">${marker.title}</p>
-                </div>`
-            );
-            infowindow.open(this.map, marker);
-            
-        })
-        .catch(err => console.log('error: ', err))
-        */
     }
 
 
@@ -200,7 +166,7 @@ class Main extends Component {
         // use string methods to get the color of the marker icon
         const color = marker.icon.substr(41).split('-')[0];
 
-        // first check to make sure a different marker is being clicked
+        // check to make sure a different marker is being clicked
         if(infowindow.marker !== marker){ 
 
             // if so, assign the infowindow to that marker
@@ -210,7 +176,13 @@ class Main extends Component {
             if (!url){
                 infowindow.setContent(
                     `<div class="infowindow">
-                        <p class="location-title">${marker.title}</p>
+                        <div class="location-info">
+                            <p class="location-title ${color}Border">${marker.title}</p>
+                            <p class="location-location">${marker.location}</p>
+                            <p class="location-type">
+                                <span class="bullet ${color}Bullet">&bull;</span> ${marker.type} site
+                            </p>
+                        </div>
                     </div>`
                 );
             } else {
@@ -221,6 +193,7 @@ class Main extends Component {
                         <div class="location-info">
                             <p class="location-title ${color}Border">${marker.title}</p>
                             <p class="location-location">${marker.location}</p>
+                            <p class="location-inscription">Date of Inscription: ${marker.date}</p>
                             <p class="location-type">
                                 <span class="bullet ${color}Bullet">&bull;</span> ${marker.type} site
                             </p>
