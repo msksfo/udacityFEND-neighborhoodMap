@@ -1,6 +1,6 @@
 [
     {
-        "name": "City of Bath", 
+        "name": "City of Bath",
         "location": "Bath, England",
         "coords": {"lat": 51.3811, "lng": 2.3590},
         "type": "cultural",
@@ -11,7 +11,7 @@
     },
     {
         "name": "Cliff of Bandiagara",
-        "location": "Mopti Region, Mali", 
+        "location": "Mopti Region, Mali",
         "coords": {"lat": 14.4278, "lng": 3.3253},
         "type": "mixed",
         "markerShowing": true,
@@ -21,7 +21,7 @@
     },
     {
         "name": "Great Barrier Reef",
-        "location": "Queensland, Australia", 
+        "location": "Queensland, Australia",
         "coords": {"lat": -18.156290, "lng": 147.485962},
         "type": "natural",
         "markerShowing": true,
@@ -30,7 +30,7 @@
         "photoSrc": ""
     },
     {
-        "name": "Historic City of Yazd", 
+        "name": "Historic City of Yazd",
         "location": "Yazd, Iran",
         "coords": {"lat": 31.897423, "lng": 54.356857},
         "type": "cultural",
@@ -40,7 +40,7 @@
         "photoSrc": ""
     },
     {
-        "name": "Ilulissat Icefjord", 
+        "name": "Ilulissat Icefjord",
         "location": "Avannaata, Greenland",
         "coords": {"lat": 69.21667, "lng": -51.1},
         "type": "natural",
@@ -50,7 +50,7 @@
         "photoSrc": ""
     },
     {
-        "name": "Itsukushima Shrine", 
+        "name": "Itsukushima Shrine",
         "location": "Hiroshima Prefecture, Japan",
         "coords": {"lat": 34.2960, "lng": 132.3199},
         "type": "cultural",
@@ -61,7 +61,7 @@
     },
     {
         "name": "Machu Picchu",
-        "location": "Urubamba Province, Peru", 
+        "location": "Urubamba Province, Peru",
         "coords": {"lat": -13.1631, "lng": -72.5450},
         "type": "mixed",
         "markerShowing": true,
@@ -71,7 +71,7 @@
     },
     {
         "name": "Palau de la Musica Catalana",
-        "location": "Barcelona, Spain", 
+        "location": "Barcelona, Spain",
         "coords": {"lat": 41.3876, "lng": 2.1753},
         "type": "cultural",
         "markerShowing": true,
@@ -80,7 +80,7 @@
         "photoSrc": ""
     },
     {
-        "name": "Plitvice Lakes National Park", 
+        "name": "Plitvice Lakes National Park",
         "location": "Plitvice Lakes National Park, Croatia",
         "coords": {"lat": 44.8654, "lng": 15.5820},
         "type": "natural",
@@ -91,7 +91,7 @@
     },
     {
         "name": "Serengeti National Park",
-        "location": "Serengeti National Park, Tanzania", 
+        "location": "Serengeti National Park, Tanzania",
         "coords": {"lat": -2.333333, "lng": 34.833332},
         "type": "natural",
         "markerShowing": true,
