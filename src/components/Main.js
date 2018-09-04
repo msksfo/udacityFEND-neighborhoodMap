@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import '../App.css';
 import Sidebar from './Sidebar';
 import * as Sites from '../sites.json';
 import globe from '../images/globe.png';
