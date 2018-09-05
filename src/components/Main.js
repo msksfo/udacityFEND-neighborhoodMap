@@ -237,7 +237,7 @@ class Main extends Component {
     // use the select element to filter sites by type
     handleChange = (e) => {
         const allSites = this.state.sites;
-        let filtered = this.state.filteredSites; // why doesn't this work with const???
+        let filtered = this.state.filteredSites; 
         const siteType = e.target.value;
         
         // if any infowindow was open, close it
@@ -279,13 +279,14 @@ class Main extends Component {
     // handle user clicking or tabbing onto one of the sites in the sidebar list of sites
     handleListItemEvent = (e) => {
         const key = e.key;
-        const markers = this.state.markers;
+
+        // reference the state with object destructuring instead of a new variable
+        const { sites, markers } = this.state;
 
          // find the marker corresponding to the site that triggered the event
          const index = markers.findIndex( (value) => value.title === e.target.textContent)
                     
          // find the site with the name matching the text content of the clicked list item, to get the image source for the infowindow
-         const sites = this.state.sites;
          const site = sites.find(value => value.name === e.target.textContent)
          const photoUrl = site.photoSrc;
 
